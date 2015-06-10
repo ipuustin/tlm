@@ -1,6 +1,6 @@
 ## Process this file with automake to produce Makefile.in
 
-bin_PROGRAMS = tlm-client tlm-launcher
+bin_PROGRAMS = tlm-client tlm-launcher tlm-seatconf
 
 tlm_client_SOURCES = tlm-client.c
 tlm_client_CFLAGS = \
@@ -29,5 +29,15 @@ tlm_launcher_LDADD = \
 	$(top_builddir)/src/common/libtlm-common.la \
   $(GLIB_LIBS) \
   $(DEPS_LIBS)
+
+tlm_seatconf_SOURCES = tlm-seatconf.c
+tlm_seatconf_CFLAGS = \
+    $(TLM_INCLUDES) \
+    $(TLM_CFLAGS) \
+    $(DEPS_CFLAGS) \
+    -DTLM_SYSCONF_DIR='"$(sysconfdir)"'
+tlm_seatconf_LDADD = \
+    $(GLIB_LIBS) \
+    $(DEPS_LIBS)
 
 CLEANFILES = *.gcno *.gcda
